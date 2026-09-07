@@ -48,11 +48,11 @@ def load_model_info(file_path: str) -> dict:
         logging.error('Unexpected error occurred while loading the model info: %s', e)
         raise
 
-def register_model(model_name: str, model_id: str):
+def register_model(model_name: str, run_id: str):
     """Register the logged model to the MLflow Model Registry."""
     try:
         model_version = mlflow.register_model(
-            model_uri=f"models:/{model_id}",
+            model_uri=f"runs:/{run_id}/model",
             name=model_name
         )
 
@@ -70,7 +70,7 @@ def main():
         model_info = load_model_info(model_info_path)
         
         model_name = "my_model"
-        register_model(model_name, model_info['model_id'])
+        register_model(model_name, model_info['run_id'])
     except Exception as e:
         logging.error('Failed to complete the model registration process: %s', e)
         print(f"Error: {e}")
