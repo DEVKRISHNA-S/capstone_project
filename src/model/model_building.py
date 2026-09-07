@@ -59,7 +59,7 @@ def main():
             # Log model to MLflow
             mlflow.sklearn.log_model(
                 clf,
-                name="model"
+                artifact_path="model"
             )
 
             logging.info("Model logged to MLflow")
