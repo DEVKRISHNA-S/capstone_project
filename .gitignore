@@ -29,3 +29,8 @@ dist/
 *.egg-info/
 
 cred.txt
+
+.dvc/
+.dvcignore
+data/
+models/
