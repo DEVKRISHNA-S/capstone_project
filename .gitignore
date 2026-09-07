@@ -32,5 +32,5 @@ cred.txt
 
 .dvc/
 .dvcignore
-data/
+mlruns/
 models/
