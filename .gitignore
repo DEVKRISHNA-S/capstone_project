@@ -33,3 +33,5 @@ cred.txt
 .dvc/
 .dvcignore
 mlruns/
+models/
+data/
