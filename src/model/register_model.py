@@ -49,15 +49,22 @@ def load_model_info(file_path: str) -> dict:
         raise
 
 def register_model(model_name: str, run_id: str):
-    """Register the logged model to the MLflow Model Registry."""
+    """Register the logged model to the MLflow Model Registry and move it to Staging."""
     try:
         model_version = mlflow.register_model(
             model_uri=f"runs:/{run_id}/model",
             name=model_name
         )
 
+        client = mlflow.MlflowClient()
+        client.transition_model_version_stage(
+            name=model_name,
+            version=model_version.version,
+            stage="Staging"
+        )
+
         logging.info(
-            f"Model {model_name} version {model_version.version} registered successfully."
+            f"Model {model_name} version {model_version.version} registered and moved to Staging."
         )
 
     except Exception as e:
